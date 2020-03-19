@@ -32,7 +32,7 @@ router.post('/login', (req, res) =>
   else{
     res.status(401)
       .json({
-        message: err || "Validation failed. Given email and password aren't matching."
+        message: "Validation failed. Given email and password aren't matching."
       })
   }
 });

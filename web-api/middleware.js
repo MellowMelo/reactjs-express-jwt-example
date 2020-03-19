@@ -3,7 +3,7 @@ const { verifyJWTToken } = require('./libs/auth');
 module.exports = { 
   verifyJWT_MW(req, res, next)
     {
-      let token = (req.method === 'POST') ? req.body.token : req.query.token
+      let token = (req.method === 'POST') ? req.body.token : req.query.token;
 
       verifyJWTToken(token)
         .then((decodedToken) =>

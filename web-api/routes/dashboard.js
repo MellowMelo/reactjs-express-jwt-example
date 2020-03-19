@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.all('*', verifyJWT_MW);
 
-router.get('/', (req, res) =>
+router.all('/', (req, res) =>
 {
   res.status(200)
     .json({
