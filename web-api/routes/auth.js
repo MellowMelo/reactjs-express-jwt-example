@@ -1,16 +1,15 @@
-import express from 'express'
+const express = require('express');
 
-import db from '../models'
-import { createJWToken } from '../libs/auth'
-import { paramCheck } from '../middlewares'
+const { createJWToken } = require('../libs/auth');
+const { paramCheck } = require('../middleware');
 
-const router = express.Router()
+const router = express.Router();
 
 /*
   ROUTES
 */
 
-router.post('*', paramCheck(['email', 'password']))
+// router.post('*', paramCheck(['email', 'password']))
 
 router.post('/login', (req, res) =>
 {
@@ -36,6 +35,6 @@ router.post('/login', (req, res) =>
         message: err || "Validation failed. Given email and password aren't matching."
       })
   }
-})
+});
 
-export default router;
+module.exports = router;

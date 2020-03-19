@@ -1,4 +1,6 @@
-const { jwt } = require('jsonwebtoken');
+require("dotenv-safe").config();
+const jwt = require('jsonwebtoken');
+const _ = require('lodash');
 
 module.exports = {
   verifyJWTToken(token) 
@@ -37,13 +39,16 @@ module.exports = {
         return memo
       }, {})
 
-      let token = jwt.sign({
-        data: details.sessionData
-        }, process.env.JWT_SECRET, {
+      let token = jwt.sign(
+        {
+          data: details.sessionData
+        }, 
+        process.env.JWT_SECRET, 
+        {
           expiresIn: details.maxAge,
           algorithm: 'HS256'
-      })
+        });
 
-      return token
+      return token;
     }
 }
