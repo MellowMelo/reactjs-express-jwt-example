@@ -12,7 +12,7 @@ app.use(bodyParser());
 app.use(cors());
 
 app.use(require("./routes/auth"));//Auth Method
-app.all(pathAuth, verifyJWT_MW);// verify Token middleware
+app.use(pathAuth, verifyJWT_MW);// verify Token middleware
 
 app.use(path, require("./routes/r1"));
 
