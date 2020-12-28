@@ -9,15 +9,15 @@ const router = express.Router();
   ROUTES
 */
 
-// router.post('*', paramCheck(['email', 'password']))
+// router.post('*', paramCheck(['login', 'password']))
 
 router.post('/login', (req, res) =>
 {
-  let { email, password } = req.body
+  let { login, password } = req.body
 
-  if(email=="teste@teste.com" && password=="teste"){//simulating a true login
+  if(login=="teste@teste.com" && password=="teste"){//simulating a true login
     let user = {
-        email,
+        login,
         password
     }
     res.status(200)
@@ -32,7 +32,7 @@ router.post('/login', (req, res) =>
   else{
     res.status(401)
       .json({
-        message: "Validation failed. Given email and password aren't matching."
+        message: "Validation failed. Given login and password aren't matching."
       })
   }
 });

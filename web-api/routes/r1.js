@@ -11,7 +11,7 @@ router.all('/auth/m1', (req, res) =>
   res.status(200)
     .json({
       success: true,
-      data: "You token is Valid!"
+      data: "Your token is Valid!"
     })
 })
 
