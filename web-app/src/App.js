@@ -1,23 +1,28 @@
 import './App.css';
 import {useState, useEffect} from 'react';
-import {api, authApi, updateApiToken} from './services/api';
+import api from './services/api';
 
 function App() {
     let [logged, setLogged] = useState(false);
     let [login, setLogin] = useState("");
     let [password, setPassword] = useState("");
     let [status, setStatus] = useState("None");
-
-    useEffect(()=>{
-        if (sessionStorage.getItem('Authorization')) setLogged(true)
-    });     
+    
+    useEffect(async ()=>{
+        let { data } = await api.get('/csrf-token');
+        api.defaults.headers.post['X-CSRF-Token'] = data.csrfToken;
+        await api.get("/auth/m1").then(response => {
+            setLogged(true);
+            setStatus(response.status+" Logged");
+        }).catch(err => {
+            
+        });
+    }, []);
 
     async function handleLogin(e){
         e.preventDefault();
 
         await api.post("/login", {login, password}).then(response => {
-            sessionStorage.setItem('Authorization', response.data.token);
-            updateApiToken();
             setStatus(response.status+" Logged");
             setLogged(true);
         }).catch(err => {
@@ -25,23 +30,17 @@ function App() {
         });
     }
 
-    function logout(){
-        sessionStorage.removeItem('Authorization');
-        updateApiToken();
-        setStatus("Logout");
-        setLogged(false);
-    }
-
-    async function AuthorizedRoute(){
-        await authApi.get("/m1").then(response => {
-            setStatus(response.status+" "+response.data.data);
+    async function logout(){
+        await api.post("/logout", {login, password}).then(response => {
+            setStatus("Logout");
+            setLogged(false);
         }).catch(err => {
-            setStatus(err.request.status+" Token Problem");
+            setStatus(err.request.status+" Logout Problem");
         });
     }
 
     async function AuthorizedRoute(){
-        await authApi.get("/m1").then(response => {
+        await api.get("/auth/m1").then(response => {
             setStatus(response.status+" "+response.data.data);
         }).catch(err => {
             setStatus(err.request.status+" Token Problem");
