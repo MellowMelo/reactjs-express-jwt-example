@@ -4,7 +4,7 @@ module.exports = {
   verifyJWT_MW(req, res, next)
     {
       // let token = (req.method === 'POST') ? req.body.token : req.query.token;
-      let token = req.header("Authorization") || "invalid";
+      let token = req.cookies.token || "invalid";
 
       verifyJWTToken(token)
         .then((decodedToken) =>

@@ -20,14 +20,19 @@ router.post('/login', (req, res) =>
         login,
         password
     }
-    res.status(200)
-      .json({
-        success: true,
-        token: createJWToken({
-            sessionData: user,
-            maxAge: 3600
-          })
-      })
+    const token = createJWToken({
+      sessionData: user,
+      maxAge: 3600
+    })
+    res.cookie('token', token, { httpOnly: true }).status(200).json({});
+    // res.status(200)
+    //   .json({
+    //     success: true,
+    //     token: createJWToken({
+    //         sessionData: user,
+    //         maxAge: 3600
+    //       })
+    //   })
   }
   else{
     res.status(401)
@@ -35,6 +40,10 @@ router.post('/login', (req, res) =>
         message: "Validation failed. Given login and password aren't matching."
       })
   }
+});
+
+router.post("/logout", (req, res)=>{
+  res.cookie('token', 'invalid', { httpOnly: true }).status(200).json({});
 });
 
 module.exports = router;
