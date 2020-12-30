@@ -11,3 +11,5 @@
 Copy and paste .env.example on /web-api folder and rename it to .env , inside it you need you need to attribute  a value to JWT_SECRET param, example: JWT_SECRET=SECRET. 
 
 Run both server and client side application on dev mod(The React application its running on port 3000 and the server is running on port 3400, if you want to change the server port do not forget to change the porxy settings on the package.json from the Client application too!) and you will be able to test the application from client side.
+
+Login = teste@teste.com | Password = teste
