@@ -24,7 +24,7 @@ router.post('/login', (req, res) =>
       sessionData: user,
       maxAge: 3600
     })
-    res.cookie('token', token, { httpOnly: true }).status(200).json({});
+    res.cookie('token', token, { httpOnly: true }).status(200).json({ token: token});
     // res.status(200)
     //   .json({
     //     success: true,
