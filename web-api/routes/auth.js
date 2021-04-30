@@ -24,7 +24,7 @@ router.post('/login', (req, res) =>
     //   Never put the login along with the password on 
     //   the JWT payload, because this is a security breach.
     //   You should use other informations like Login and User Id.
-    //   I am only using this because his is a quick example.
+    //   I am only using this because this is a quick example.
     const token = createJWToken({
       sessionData: user,
       maxAge: 3600
