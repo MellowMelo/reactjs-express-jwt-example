@@ -16,10 +16,15 @@ router.post('/login', (req, res) =>
   let { login, password } = req.body
 
   if(login=="teste@teste.com" && password=="teste"){//simulating a true login
-    let user = {
+    let user = {//Payload
         login,
         password
     }
+    // NOTE:
+    //   Never put the login along with the password on 
+    //   the JWT payload, because this is a security breach.
+    //   You should use other informations like Login and User Id.
+    //   I am only using this because his is a quick example.
     const token = createJWToken({
       sessionData: user,
       maxAge: 3600
