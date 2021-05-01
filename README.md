@@ -8,8 +8,7 @@
 
 ## Knowledge and frameworks used
 
-> teste
-> teste
+> Reactjs | Nodejs | Jwt | Cookies
 
 ## Usage
 
